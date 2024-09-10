@@ -1,0 +1,87 @@
+<section>
+  <div class="row g-0">
+    <div class="col-md-9">
+        <owl-carousel-o [options]="customMainCategory">
+          <ng-template carouselSlide>
+            <img src="./assets/images/img1.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img2.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img3.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img4.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img5.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img6.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+          <ng-template carouselSlide>
+            <img src="./assets/images/img7.avif" height="300px" class="w-100" alt="mainCategory">
+          </ng-template>
+        </owl-carousel-o>
+    </div>
+    <div class="col-md-3">
+      <img src="./assets/images/slider-image-1.jpeg" height="150px" class="w-100" alt="">
+      <img src="./assets/images/slider-image-2.jpeg" height="150px" class="w-100" alt="">
+    </div>
+  </div>
+</section>
+
+<section>
+  <owl-carousel-o [options]="customOptionsCategory">
+    @for (category of allCategories(); track category._id) {
+      <ng-template carouselSlide>
+        <div [routerLink]="['/subCategory', category._id, category.name]">
+          <img [src]="category.image" class="w-100" height="200px">
+          <h3 class="titleCat text-center">{{category.name}}</h3>
+        </div>
+      </ng-template>
+    }
+  </owl-carousel-o>
+</section>
+
+<section class="my-3">
+  <h1 class="text-success fw-bold mt-3">Popular Products</h1>
+  <input [(ngModel)] = "dataSearch" type="text" class="form-control w-75 mx-auto my-2" placeholder="Search By Name...">
+
+  <div class="row g-4">
+    @for (product of allProducts().slice(0,12).reverse() | search : dataSearch() ; track product.id) {
+      <div class="col-lg-2 col-md-6">
+        <div class="card shadow bg-light rounded h-100 position-relative">
+          @if(!wishListIds().includes(product.id)){
+            <i class="heart fa-solid fa-heart" (click)="addWishList(product.id)"></i>
+          }
+          @if(wishListIds().includes(product.id)){
+            <i class="heart text-danger fa-solid fa-heart" (click)="deletewishlistItem(product.id)"></i>
+          }
+
+          <div [routerLink]="['/details', product.id]">
+            <img [src]="product.imageCover" class="card-img" [alt]="product.title">
+            <div class="card-body p-2">
+              <h3 class="h5">{{product.title.split(' ', 2).join(' ') }}</h3>
+              <h4 class="h6">{{product.category.name}}</h4>
+              <div class="d-flex justify-content-between align-items-center">
+                <span>{{product.price | currency : 'GBP'}}</span>
+                <span>
+                  @for (star of [1,2,3,4,5].slice(0, product.ratingsAverage); track $index) {
+                    <i class="fa-solid fa-star text-warning"></i>
+                  }
+                  @if(product.ratingsAverage % 1 !== 0){
+                    <i class="fa-solid fa-star-half-stroke text-warning"></i>
+                  }
+                  {{product.ratingsAverage}}
+                </span>
+              </div>
+            </div>
+          </div>
+          <button class="btn btn-success" (click)="addCart(product.id)">Add To Cart</button>
+        </div>
+      </div>
+    }
+  </div>
+</section>

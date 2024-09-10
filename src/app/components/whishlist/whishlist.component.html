@@ -1,0 +1,21 @@
+<section class="bg-light my-2 w-75 mx-auto rounded p-4">
+  <h1 class="text-center text-success">Wish List</h1>
+  <h5>Total Product In WishList : {{countWishList()}}</h5>
+  @for (product of wishList(); track $index) {
+    <div class="row shadow mt-2 py-2 align-items-center">
+      <div class="col-md-2">
+        <img class="w-100" [src]="product.imageCover" [alt]="product.title">
+      </div>
+      <div class="col-md-10">
+        <div class="wishListBody d-flex justify-content-between align-items-center p-1">
+          <div>
+            <h2 class="h5">{{product.title.split(' ', 10).join(' ')}}</h2>
+            <span class="d-block">{{product.price | currency: 'GBP'}}</span>
+            <span class="text-danger cr" (click)="deletewishlistItem(product.id)"><i class="fa-solid fa-trash"></i> Remove</span>
+          </div>
+          <button class="btn btn-success" (click)="addToCart(product.id)">Add To Cart</button>
+        </div>
+      </div>
+    </div>
+  }
+</section>

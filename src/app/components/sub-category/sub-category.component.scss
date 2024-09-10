@@ -1,0 +1,14 @@
+.shadow{
+  transition: all .5s;
+}
+.shadow:hover{
+  box-shadow: 0 0 5px 5px greenyellow !important;
+}
+@media (max-width:576px) {
+  h1{
+    font-size: 22px;
+  }
+}
+.fa-right-from-bracket{
+  transform: rotate(180deg);
+}

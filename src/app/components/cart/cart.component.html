@@ -1,0 +1,33 @@
+<section class="bg-light my-2 w-75 mx-auto rounded p-4">
+  <h1 class="text-success text-center">Products Cart</h1>
+  <div class="cartHeader d-flex justify-content-between">
+    <h2>Total price : {{productsCart().totalCartPrice | currency : 'GBP'}}</h2>
+    <div class="text-end">
+      <button class="btn btn-outline-danger" (click)="alertBeforeDelete()" [disabled]="displayBtn">Clear Cart</button>
+      <h5>Total Number Of items: {{totalItems()}}</h5>
+    </div>
+  </div>
+  @for (item of productsCart().products; track $index) {
+    <div class="row shadow mt-2 py-2">
+      <div class="col-md-2">
+        <img class="w-100" [src]="item.product.imageCover" [alt]="item.product.title">
+      </div>
+      <div class="col-md-10">
+        <div class="d-flex justify-content-between align-items-center p-1">
+          <div>
+            <h2 class="h5">{{item.product.title}}</h2>
+            <h3 class="h6">{{item.product.category.name}}</h3>
+            <span class="d-block">{{item.price | currency: 'GBP'}}</span>
+            <span class="text-danger cr" (click)="deleteCartItem(item.product.id)"><i class="fa-solid fa-trash"></i> Remove</span>
+          </div>
+          <div class="d-flex gap-2">
+            <span class="cr" (click)="updateProductQuantity(item.product.id, item.count + 1)"><i class="fa-solid fa-circle-plus"></i></span>
+            <span>{{item.count}}</span>
+            <span class="cr" (click)="updateProductQuantity(item.product.id, item.count - 1)"><i class="fa-solid fa-circle-minus"></i></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  }
+  <button class="btn btn-outline-success mt-2" [disabled]="displayBtn" [routerLink]="['/orders', productsCart()._id]">check Out</button>
+</section>

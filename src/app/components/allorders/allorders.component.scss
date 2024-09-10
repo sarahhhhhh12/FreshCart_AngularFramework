@@ -1,0 +1,14 @@
+.head span{
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+@media (max-width:576px) {
+  .head span{
+    top: -20px;
+    right: -10px;
+  }
+  .head h3{
+    font-size: 20px;
+  }
+}

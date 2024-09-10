@@ -1,0 +1,24 @@
+.card{
+  transition: all .5s;
+}
+.card:hover{
+  box-shadow: 0 0 3px 3px rgb(7, 39, 63) !important;
+  border: none !important;
+}
+button{
+  transform: translateY(120%);
+  transition: all .3s;
+}
+.card:hover button{
+  transform: translateY(0%);
+}
+.heart{
+  position: absolute;
+  top: 10px;
+  right: -100%;
+  font-size: 25px;
+  transition: all .3s;
+}
+.card:hover .heart{
+  right: 10px;
+}

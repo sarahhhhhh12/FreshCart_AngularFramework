@@ -1,0 +1,19 @@
+<section>
+  <h1 class="text-success text-center my-2">{{categoryName()}} Subcategories</h1>
+  <span class="text-dark cr" routerLink="/categories"><i class="fa-solid fa-right-from-bracket"></i> Back</span>
+  <div class="row g-4">
+    @if(allSubCategory().length > 0){
+      @for (product of allSubCategory(); track $index) {
+        <div class="col-lg-3 col-md-4">
+          <div class="shadow rounded text-center p-2 my-2">
+            <h4 class="mt-2">{{product.name}}</h4>
+          </div>
+        </div>
+      }
+    } @else{
+      <h5 class="text-center h6 mt-5">{{msgUndefind()}}</h5>
+    }
+
+  </div>
+</section>
+

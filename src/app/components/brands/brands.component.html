@@ -1,0 +1,38 @@
+<section>
+  <h1 class="text-success text-center my-2">All Brands</h1>
+  <div class="row g-4">
+    @for (brand of allBrands(); track $index) {
+      <div class="col-md-3">
+        <div class="shadow rounded p-2 text-center cr" (click)="spacificBrand(brand._id)" data-bs-toggle="modal" data-bs-target="#exampleModal">
+          <img [src]="brand.image" class="w-100" [alt]="brand.name">
+          <h4>{{brand.name}}</h4>
+        </div>
+      </div>
+    }
+  </div>
+
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="d-flex justify-content-between align-items-center">
+            <div>
+              <h2 class="text-success">{{getSpacificBrand().name}}</h2>
+              <h5>{{getSpacificBrand().slug}}</h5>
+            </div>
+            <div>
+              <img [src]="getSpacificBrand().image" class="w-100" alt="">
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
